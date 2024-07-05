@@ -1,12 +1,12 @@
 const $timer = $(".timer");
-const $form = $(".add-word");
+const $form = $(".word-add");
 
 let time;
 let id;
 let words;
 let score;
 
-$('.add-word').hide();
+$('.word-add').hide();
 
 function handleSubmit(evt) {
     evt.preventDefault();
@@ -21,7 +21,7 @@ function handleSubmit(evt) {
 
 function startGame() {
     $('.new-game').hide();
-    $('.add-word').show();
+    $('.word-add').show();
     time = 60;
     score = 0;
     words = new Set();
@@ -29,7 +29,7 @@ function startGame() {
 }
 
 function endGame(){
-    $(".add-word").hide();
+    $(".word-add").hide();
     $('.messages').text(`Your Score: ${score}`);
     $('.new-game').show();
 
