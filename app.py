@@ -21,21 +21,19 @@ def display_home_page():
 @app.route('/look-word', methods=['POST'])
 def look_word():
     """this will hold the submission of word"""
-
     word = request.json['word']
     board = session['board']
     result = boggle_game.check_valid_word(board, word)
 
     return jsonify({'result': result})
 
-@app.route('/update-score', methods =['POST'])
+@app.route('/update-score', methods=['POST'])
 def score_update():
     """retriving score & updating scoreboard"""
     score = request.json['score']
     highscore = session.get('highscore', 0)
     num_played= session.get('num_played', 0)
-
     session["num_played"] = num_played + 1
     session["highscore"] = max(score,highscore)
-    
+
     return jsonify(newScore = score > highscore)
