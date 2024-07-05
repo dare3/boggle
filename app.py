@@ -15,6 +15,7 @@ def display_home_page():
     session['board'] = board
     highscore = session.get('highscore', 0)
     num_played = session.get('num_played', 0)
+
     return render_template('index.html', board = board, highscore=highscore, num_played=num_played)
 
 @app.route('/look-word', methods=['POST'])
@@ -36,4 +37,5 @@ def score_update():
 
     session["num_played"] = num_played + 1
     session["highscore"] = max(score,highscore)
+    
     return jsonify(newScore = score > highscore)
