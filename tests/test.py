@@ -28,7 +28,7 @@ class FlaskTests(TestCase):
     def test_valid_word(self):
         with app.test_client() as client:
             with client.session_transaction() as sess:
-                sess['board'] = [["B","A","R","R","R"],
+                sess['board'] = [["B","","R","R","R"],
                                 ["B","A","R","R","R"],
                                 ["B","A","R","R","R"],
                                 ["B","A","R","R","R"],
@@ -38,12 +38,13 @@ class FlaskTests(TestCase):
 
     def test_invalid_word(self):
         with app.test_client() as client:
-            self.client.get('/')
+            client.get('/')
             response = self.client.get('/check-word?word=fool')
             self.assertEqual(response.json['result'], 'not-on-board')
 
+            
+
     def test_not_a_word(self):
-        with app.test_client() as client:
             self.client.get('/')
             response = self.client.get('/check-word?word=awvrvwai')
             self.assertEqual(response.json['result'], 'not-word')
